@@ -8,19 +8,19 @@ import { ThyNotifyModule } from 'ngx-tethys/notify';
 import { ThyDatePickerModule } from 'ngx-tethys/date-picker';
 import { inject, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { GANTT_GLOBAL_CONFIG, GanttI18nLocale, NgxGanttModule } from 'ngx-gantt';
+import { GANTT_GLOBAL_CONFIG, GanttDateFormatPipe, GanttI18nLocale, NgxGanttModule } from 'ngx-gantt';
 import { AppComponent } from './app.component';
 import { AppGanttExampleComponent } from './gantt/gantt.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 import { AppGanttAdvancedExampleComponent } from './gantt-advanced/gantt-advanced.component';
 import { AppGanttRangeExampleComponent } from './gantt-range/gantt-range.component';
-import { DOCGENI_SITE_PROVIDERS } from './content/index';
+//import { DOCGENI_SITE_PROVIDERS }                                from './content/index';
 import { DocgeniTemplateModule, GlobalContext } from '@docgeni/template';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppGanttFlatComponent } from './gantt-advanced/component/flat.component';
-import { EXAMPLE_MODULES } from './content/example-modules';
+//import { EXAMPLE_MODULES } from './content/example-modules';
 import { AppExampleComponentsComponent } from './components/components.component';
 import { AppGanttGroupsExampleComponent } from './gantt-groups/gantt-groups.component';
 import { AppGanttCustomViewExampleComponent } from './gantt-custom-view/gantt.component';
@@ -30,7 +30,7 @@ import { AppGanttVirtualScrollExampleComponent } from './gantt-virtual-scroll/ga
     declarations: [
         AppComponent,
         AppExampleComponentsComponent,
-        AppGanttExampleComponent,
+        //AppGanttExampleComponent,
         AppGanttAdvancedExampleComponent,
         AppGanttGroupsExampleComponent,
         AppGanttVirtualScrollExampleComponent,
@@ -53,10 +53,12 @@ import { AppGanttVirtualScrollExampleComponent } from './gantt-virtual-scroll/ga
         ThyNotifyModule,
         ThySwitchModule,
         ThyDatePickerModule,
-        ...EXAMPLE_MODULES
+        GanttDateFormatPipe,
+        AppGanttExampleComponent
+        //...EXAMPLE_MODULES
     ],
     providers: [
-        ...DOCGENI_SITE_PROVIDERS,
+        //...DOCGENI_SITE_PROVIDERS,
         {
             provide: GANTT_GLOBAL_CONFIG,
             useFactory: () => {

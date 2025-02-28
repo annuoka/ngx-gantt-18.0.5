@@ -16,7 +16,10 @@ import {
     GanttToolbarOptions,
     GanttView,
     GanttViewType,
-    NgxGanttComponent
+    GanttDateFormatPipe,
+    NgxGanttComponent,
+    NgxGanttTableColumnComponent,
+    NgxGanttTableComponent
 } from 'ngx-gantt';
 import { ThyNotifyService } from 'ngx-tethys/notify';
 import { finalize, of } from 'rxjs';
@@ -27,6 +30,8 @@ import { random, randomItems } from '../helper';
     selector: 'app-gantt-example',
     templateUrl: './gantt.component.html',
     styleUrls: ['./gantt.scss'],
+    standalone: true,
+    imports: [NgxGanttTableColumnComponent, GanttDateFormatPipe, NgxGanttTableComponent, NgxGanttComponent],
     providers: [GanttPrintService]
 })
 export class AppGanttExampleComponent implements OnInit, AfterViewInit {
@@ -50,6 +55,7 @@ export class AppGanttExampleComponent implements OnInit, AfterViewInit {
     isShowToolbarChecked = true;
 
     loading = false;
+    counter = 0;
 
     items: GanttItem[] = [
         { id: '000000', title: 'Task 0', start: 1627729997, end: 1627769997, draggable: false, linkable: false },
@@ -64,7 +70,10 @@ export class AppGanttExampleComponent implements OnInit, AfterViewInit {
         { id: '000008', title: 'Task 8', end: 1628783999, color: '#709dc1' },
         { id: '000009', title: 'Task 9', start: 1639307597, end: 1640344397 },
         { id: '0000010', title: 'Task 10', start: 1609067597, end: 1617275597 },
-        { id: '0000011', title: 'Task 11', start: new Date(1611918797 * 1000), end: new Date(1611918797 * 1000) },
+        { id: '0000011', title: 'Task 11', start: new Date(1611918797 * 1000), end: new Date(1611918797 * 1000) }
+    ];
+
+    newItems: GanttItem[] = [
         { id: '0000012', title: 'Task 12', start: new Date(1627816397 * 1000), end: new Date(1631358797 * 1000) },
         { id: '0000013', title: 'Task 13', start: new Date(1625051597 * 1000), end: new Date(1630667597 * 1000), links: ['0000012'] },
         { id: '0000014', title: 'Task 14', start: new Date(1627920000 * 1000), end: new Date(1629129599 * 1000) },
@@ -119,6 +128,11 @@ export class AppGanttExampleComponent implements OnInit, AfterViewInit {
         }, 5000);
 
         console.log(this.items);
+    }
+
+    add() {
+        this.items = [...this.items, this.newItems[this.counter]];
+        this.counter++;
     }
 
     ngAfterViewInit() {
